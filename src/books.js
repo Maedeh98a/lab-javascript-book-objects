@@ -62,13 +62,13 @@ function getBookDetails(bookName) {
 booksArray.forEach(book =>{
   delete book.details.language;
 })
-console.log(booksArray)
+
 
 // Iteration 4 | Estimated Reading Time
 booksArray.forEach(book =>{
   book.readingTime = Math.ceil((book.pages * 500)/90);
 })
-console.log(booksArray)
+
 
 // Bonus: Iteration 5 | Books Dictionary
 
@@ -92,12 +92,41 @@ const dictionary = {
     ["Blink", 287],
   ],
 };
+  
 
-function booksByAuthor() {
 
+
+
+
+function booksByAuthor(dictionary) {
+  const bookObjectArray = [];
+  
+  for(let authorName in dictionary){
+    booksInfo = Object.values(dictionary[authorName])
+    booksInfo.forEach(bookEntry => {
+      bookObjectArray.push({
+        title: bookEntry[0],
+        pages: bookEntry[1],
+        author: authorName
+      })
+    })
+  }
+
+return bookObjectArray;
 }
 
+console.log(booksByAuthor(dictionary))
+
 // Bonus: Iteration 6 | Average Page Count
-function averagePageCount() {
-  // Your code here:
+function averagePageCount(booksArray) {
+  let averagePageCount = 0;
+  let sumOfPages = 0;
+  let totalBooks = 0;
+  booksArray.forEach(book =>{
+    sumOfPages += book.pages;
+    totalBooks ++;
+
+  })
+  averagePageCount = sumOfPages / totalBooks;
+  return averagePageCount
 }
